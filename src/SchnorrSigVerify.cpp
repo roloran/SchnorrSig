@@ -138,6 +138,8 @@ int SchnorrSigVerify::verify(const unsigned char *msg, int msg_len, struct Schno
         ret = mbedtls_ecp_point_cmp(&R, &s_sig.R);
         
         cleanup:
+        mbedtls_ecp_point_free(&s_sig.R);
+        mbedtls_mpi_free(&s_sig.s);
         mbedtls_ecp_point_free(&R);
         mbedtls_mpi_free(&BNh);
         
